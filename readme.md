@@ -47,4 +47,13 @@ Then deploy the contents of the `dist` directory to your server.  You can also r
 
 
 # 如何使用vector data
-- Rendering GeoJSON
+- Rendering GeoJSON  展示geojson数据分成三个组成部分
+![](./assets/2023-02-05-20-37-20.png)
+ - 读入数据
+ - 用于获取数据和管理特征的空间索引的矢量源
+ - a vector layer for rendering the features on the map
+
+
+
+## geojson数据
+![](./assets/2023-02-05-20-41-36.png)
