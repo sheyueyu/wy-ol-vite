@@ -6,13 +6,15 @@ import VectorLayer from 'ol/layer/vector';
 import VectorSource from 'ol/source/Vector';
 import { transform } from 'ol/proj';
 import Draw from 'ol/interaction/Draw';
+import {Style,Fill,Stroke} from 'ol/style';
+import { returnOrUpdate } from 'ol/extent';
 
 // 下面用于确定地图中心 center
 const center = [114.1692, 30.494]; //EPSG:4326
 const transformedCenter = transform(center, 'EPSG:4326', 'EPSG:3857');
 const view = new View({
   center: transformedCenter,
-  zoom: 10
+  zoom: 5
 });
 
 // 创建地图
@@ -27,9 +29,32 @@ const source = new VectorSource({
   url:'./data/hubei.geojson'
 })
 
-// 用我们的矢量源创建一个新的layer，并将其添加到地图中
+
+const style1 = new Style({
+    fill: new Fill({color: 'red'}),
+    stroke: new Stroke({
+            color:'black'
+        })
+  });
+const style2 = new Style({
+    fill: new Fill({color: 'green'}),
+    stroke: new Stroke({
+        color:'black'
+    })
+  });
+  
 const layer = new VectorLayer({
     source:source,
+    // 根据feature的属性去设置feature的样式
+    style:function(feature,resolution){
+        // TODO:根据feature的name去设置feature的样式，如果feature的name = "武汉市"，则显示为红色
+        const name  = feature.get('name');//获取feature的name
+        if(name ==='武汉市'){
+            return style1;
+        }else{
+            return style2;
+        }
+    }
 });
 map.addLayer(layer); //将图层加入到map中
 
@@ -58,11 +83,6 @@ clear.addEventListener('click',function(){
  */
 const format = new GeoJSON({featureProjection:'EPSG:3857'});//`format`变量是一个Geojson对象
 const download = document.getElementById('download');
-
-//  - 给source绑定一个"change"事件处理器
-//  - 当source发生变化时，"change"事件处理器会被触发，并将source中所有的要素写入GeoJSON
-//  - 最后，下载链接设置为GeoJSON格式数据
-
 source.on('change',function(){
    const features = source.getFeatures();//获取features中的所有要素；
    const json = format.writeFeatures(features) ; //format是一个GeoJSON对象，将要素写入GeoJSON
