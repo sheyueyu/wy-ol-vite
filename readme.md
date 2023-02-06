@@ -44,7 +44,15 @@ Then deploy the contents of the `dist` directory to your server.  You can also r
 
 # 关键知识：
 - 如果没有指定(如上面的代码片段) ，默认的投影是 SpherealMercator (EPSG: 3857) ，以米作为映射单位。
-
+layer：层
+contorl：控件
+feature：元素
+interaction：交互
+Vector：矢量的
+Tile：瓦片
+source：资源
+format：转换
+projection：投影
 
 # 如何使用vector data
 - Rendering GeoJSON  展示geojson数据分成三个组成部分
@@ -57,3 +65,6 @@ Then deploy the contents of the `dist` directory to your server.  You can also r
 
 ## geojson数据
 ![](./assets/2023-02-05-20-41-36.png)
+
+
+## 
