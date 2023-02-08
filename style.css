@@ -34,3 +34,25 @@ body {
   /* 设置边框圆角 */
   border-radius: 30px;  
 }
+
+#tools2 {
+  /* 指定元素在文档中的定位方式，为绝对定位方式 */
+  position: absolute;
+  /* 距上边界的距离 */
+  top: 4rem;
+  /* right CSS 属性定义了定位元素的右外边距边界与其包含块右边界之间的偏移，非定位元素设置此属性无效。 */
+  /* 设置位置位于右边 */
+  right: 1rem;
+}
+
+#tools2 a {
+  /* 指定元素显示的方式为内联块状元素,内联块状元素与其他内联元素相邻，并且具有块状元素的特征，可以设置宽度和高度 */
+  display: inline-block;
+  padding: 0.5rem;
+  /* 设置背景颜色 */
+  background-color: rgb(231, 217, 217);
+  /* 设置在鼠标悬停在元素上时，显示的样式 */
+  cursor: pointer;
+  /* 设置边框圆角 */
+  border-radius: 30px;  
+}
