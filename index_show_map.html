@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>OpenLayers</title>
+    <style>
+      @import "node_modules/ol/ol.css";
+    </style>
+    <style>
+      body {
+        margin: 0;
+
+      }
+      html, body{
+        height: 100%;
+        width: 100%;
+        font-family: sans-serif;
+        /* position:absolute; */
+        /* font-size: 5px; */
+      }
+      #map-container {
+        height: 100%;
+        width: 100%;
+        /* margin-top: 20px; */
+        /* float: left; */
+      }
+      #tools {
+        height: 40px;
+        background-color: rgb(253, 255, 255);
+        margin-top: 0;
+        float: left;
+        /* border-style:solid; */
+        /* padding: 10px; */
+      }
+      #tools a{
+        display: inline-block;
+        padding: 0.5rem;
+        /* 设置背景颜色 */
+        background-color: rgb(184, 202, 218);
+        /* 设置在鼠标悬停在元素上时，显示的样式 */
+        cursor: pointer;
+        /* 设置边框圆角 */
+        border-radius: 5px; 
+      }
+      .v-toolbar_content{
+        -webkit-text-size-adjust: 100%;
+    font-size: 16px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    --v-anchor-base: #55aaff;
+    --v-primary-base: #55aaff;
+    --v-primary-lighten5: #f2ffff;
+    --v-primary-lighten4: #d3ffff;
+    --v-primary-lighten3: #b5feff;
+    --v-primary-lighten2: #96e1ff;
+    --v-primary-lighten1: #76c5ff;
+    --v-primary-darken1: #2d90e2;
+    --v-primary-darken2: #0076c6;
+    --v-primary-darken3: #005eaa;
+    --v-primary-darken4: #00478f;
+    --v-secondary-base: #55aaff;
+    --v-secondary-lighten5: #f2ffff;
+    --v-secondary-lighten4: #d3ffff;
+    --v-secondary-lighten3: #b5feff;
+    --v-secondary-lighten2: #96e1ff;
+    --v-secondary-lighten1: #76c5ff;
+    --v-secondary-darken1: #2d90e2;
+    --v-secondary-darken2: #0076c6;
+    --v-secondary-darken3: #005eaa;
+    --v-secondary-darken4: #00478f;
+    --v-accent-base: #000000;
+    --v-accent-lighten5: #777777;
+    --v-accent-lighten4: #5e5e5e;
+    --v-accent-lighten3: #474747;
+    --v-accent-lighten2: #303030;
+    --v-accent-lighten1: #1b1b1b;
+    --v-accent-darken1: #000000;
+    --v-accent-darken2: #000000;
+    --v-accent-darken3: #000000;
+    --v-accent-darken4: #000000;
+    --v-error-base: #ff5252;
+    --v-error-lighten5: #ffe4d5;
+    --v-error-lighten4: #ffc6b9;
+    --v-error-lighten3: #ffa99e;
+    --v-error-lighten2: #ff8c84;
+    --v-error-lighten1: #ff6f6a;
+    --v-error-darken1: #df323b;
+    --v-error-darken2: #bf0025;
+    --v-error-darken3: #9f0010;
+    --v-error-darken4: #800000;
+    --v-info-base: #2196f3;
+    --v-info-lighten5: #d4ffff;
+    --v-info-lighten4: #b5ffff;
+    --v-info-lighten3: #95e8ff;
+    --v-info-lighten2: #75ccff;
+    --v-info-lighten1: #51b0ff;
+    --v-info-darken1: #007cd6;
+    --v-info-darken2: #0064ba;
+    --v-info-darken3: #004d9f;
+    --v-info-darken4: #003784;
+    --v-success-base: #4caf50;
+    --v-success-lighten5: #dcffd6;
+    --v-success-lighten4: #beffba;
+    --v-success-lighten3: #a2ff9e;
+    --v-success-lighten2: #85e783;
+    --v-success-lighten1: #69cb69;
+    --v-success-darken1: #2d9437;
+    --v-success-darken2: #00791e;
+    --v-success-darken3: #006000;
+    --v-success-darken4: #004700;
+    --v-warning-base: #ffc107;
+    --v-warning-lighten5: #ffffae;
+    --v-warning-lighten4: #ffff91;
+    --v-warning-lighten3: #ffff74;
+    --v-warning-lighten2: #fff956;
+    --v-warning-lighten1: #ffdd37;
+    --v-warning-darken1: #e0a600;
+    --v-warning-darken2: #c18c00;
+    --v-warning-darken3: #a27300;
+    --v-warning-darken4: #855a00;
+    --v-onprimary-base: #000000;
+    --v-onprimary-lighten5: #777777;
+    --v-onprimary-lighten4: #5e5e5e;
+    --v-onprimary-lighten3: #474747;
+    --v-onprimary-lighten2: #303030;
+    --v-onprimary-lighten1: #1b1b1b;
+    --v-onprimary-darken1: #000000;
+    --v-onprimary-darken2: #000000;
+    --v-onprimary-darken3: #000000;
+    --v-onprimary-darken4: #000000;
+    --v-onsecondary-base: #000000;
+    --v-onsecondary-lighten5: #777777;
+    --v-onsecondary-lighten4: #5e5e5e;
+    --v-onsecondary-lighten3: #474747;
+    --v-onsecondary-lighten2: #303030;
+    --v-onsecondary-lighten1: #1b1b1b;
+    --v-onsecondary-darken1: #000000;
+    --v-onsecondary-darken2: #000000;
+    --v-onsecondary-darken3: #000000;
+    --v-onsecondary-darken4: #000000;
+    line-height: 1.5;
+    font-family: Avenir,Helvetica,Arial,sans-serif;
+    color: var(--v-onprimary-base) !important;
+    caret-color: var(--v-onprimary-base) !important;
+    box-sizing: inherit;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 4px 16px;
+    align-items: center;
+    display: flex;
+    position: relative;
+    z-index: 0;
+    height: 64px;
+      }
+      
+    </style>
+    
+
+  </head>
+  <body>
+
+    <!-- <div id= "toola">右侧为工具</div> -->
+    <div class="v-toolbar_content">
+      <div class="v-toolbar_title">JingKai——Data</div>
+      <div class="spacer"></div>
+      <!-- 用于切换图层 -->
+      <button class="v-item-group">Layers</button> 
+      <button id="root" @click="showInfo">info</button>
+    </div>
+    <div id="tools">
+      <a id = "clear">清除页面</a>
+      <a id = "editor">编辑</a>
+      <a id = "addPolygon">添加Polygon</a>
+      <a id="download" download="features.json">Download</a>
+      
+      
+    </div>
+      <!-- <h2>这是{{name}}</h2> -->
+    <div id="map-container"></div>
+
+    
+
+    <!-- <div id="tools2">
+      <a id = "exit-edit">exit-edit</a>
+    </div> -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script src="./main.js" type="module"></script>
+  </body>
+</html>
