@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "ol": "latest",
-    "vue3-openlayers": "^0.1.71"
+    "vue3-openlayers": "^0.2.2"
   }
 }
